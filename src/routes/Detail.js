@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-
-let YellowBtn = styled.button`
-  background: ${(props) => props.bg};
-  color: ${(props) => (props.bg == "blue" ? "white" : "black")};
-  padding: 10px;
-`;
-
-let Box = styled.button`
-  background: yellow;
-  color: black;
-  padding: 20px;
-`;
+import { Nav, Button } from "react-bootstrap";
+import { addItem } from "./../store.js";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
   useEffect(() => {
@@ -30,19 +20,27 @@ function Detail(props) {
   let 찾은상품 = props.shoes.find(function (x) {
     return x.id == id;
   });
-
   let [alert, setAlert] = useState(true);
+  let [tab, setTab] = useState(0);
+  let [fade2, setFade2] = useState("");
+  let dispatch = useDispatch();
+  useEffect(() => {
+    setTimeout(() => {
+      setFade2("end");
+    }, 200);
+    return () => {
+      setFade2("");
+    };
+  }, []);
 
   return (
-    <div className="container">
-      {alert == true ? (
-        <div className="alert alert-warning">2초이내 구매시 할인</div>
+    <div className={"container start " + fade2}>
+      {alert === true ? (
+        <div className="alert alert-warning">
+          2초이내 구매시 할인
+          <Button variant="primary">메롱</Button>
+        </div>
       ) : null}
-
-      {/* <Box>
-        <YellowBtn bg="blue">버튼</YellowBtn>
-        <YellowBtn bg="orange">버튼</YellowBtn>
-      </Box> */}
 
       <div className="row">
         <div className="col-md-6">
@@ -55,11 +53,85 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p> {찾은상품.content}</p>
           <p> {찾은상품.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(addItem({ id: 1, name: "red knit", count: 1 }));
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
+
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link0"
+            onClick={() => {
+              setTab(0);
+            }}
+          >
+            상세정보
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link1"
+            onClick={() => {
+              setTab(1);
+            }}
+          >
+            리뷰
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link2"
+            onClick={() => {
+              setTab(2);
+            }}
+          >
+            Q&amp;A
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent tab={tab}></TabContent>
     </div>
   );
+}
+
+function TabContent({ tab }) {
+  let [fade, setFade] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFade("end");
+    }, 200);
+    return () => {
+      setFade("");
+    };
+  }, [tab]);
+
+  return (
+    <div className={"start " + fade}>
+      {
+        [<div>너무작음</div>, <div>리뷰없음</div>, <div>물어보지마세요</div>][
+          tab
+        ]
+      }
+    </div>
+  );
+
+  // if (탭 == 0) {
+  //   return <div>너무작음</div>;
+  // }
+  // if (props.tab == 1) {
+  //   return <div>리뷰없음</div>;
+  // }
+  // if (props.tab == 2) {
+  //   return <div>물어보지마세요</div>;
+  // }
 }
 
 export default Detail;

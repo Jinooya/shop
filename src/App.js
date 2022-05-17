@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import axios from "axios";
+import Cart from "./routes/Cart.js";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -47,11 +48,18 @@ function App() {
             >
               CART
             </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              ABOUT
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <FormControl
               type="search"
-              placeholder="Search"
+              placeholder="상품검색..."
               className="me-2"
               aria-label="Search"
             />
@@ -69,6 +77,7 @@ function App() {
           }
         />
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        <Route path="/cart" element={<Cart></Cart>} />
         <Route path="/about" element={<div>어바웃페이지임</div>} />
         <Route
           path="/"
@@ -79,7 +88,7 @@ function App() {
                 style={{ backgroundImage: "url(" + bg + ")" }}
               ></div>
               <div className="container">
-                <h4>brand new shoes 👟</h4>
+                <h4 class="sectionTitle">Brand New Shoes 👟</h4>
                 <div className="row">
                   {shoes.map((a, i) => {
                     return (
@@ -93,26 +102,52 @@ function App() {
                   })}
                 </div>
               </div>
+              {more > 3 ? (
+                <button
+                  className="moreBtn"
+                  onClick={() => {
+                    axios
+                      .get(
+                        `https://codingapple1.github.io/shop/data${more}.json`
+                      )
+                      .then((결과) => {
+                        let copy = [...shoes, ...결과.data];
+                        setShoes(copy);
+                      });
+                    setMore(more + 1);
+                    console.log(more);
+                  }}
+                >
+                  그만 누르셈
+                </button>
+              ) : (
+                <button
+                  className="moreBtn"
+                  onClick={() => {
+                    axios
+                      .get(
+                        `https://codingapple1.github.io/shop/data${more}.json`
+                      )
+                      .then((결과) => {
+                        let copy = [...shoes, ...결과.data];
+                        setShoes(copy);
+                      });
+                    setMore(more + 1);
+                    console.log(more);
+                  }}
+                >
+                  더보기 +
+                </button>
+              )}
 
-              <button
-                className="moreBtn"
-                onClick={() => {
-                  axios
-                    .get(`https://codingapple1.github.io/shop/data${more}.json`)
-                    .then((결과) => {
-                      let copy = [...shoes, ...결과.data];
-                      setShoes(copy);
-                    });
-                  setMore(more--);
-                  console.log(more);
-                }}
-              >
-                더보기 +
-              </button>
-
-              <footer>
-                <h1>ShoeShop</h1>
-                <p>call 010-5032-3572</p>
+              {/* footer  */}
+              <footer class="jumbotron text-center mt-5 mb-0">
+                <h3 class="text-secondary">ShoeShop</h3>
+                <p>
+                  ShoeShop’s Homepage is powered by
+                  <span class="text-primary"> codingapple</span> / Designed by
+                  <span class="text-primary"> jinwoo</span>
+                </p>
               </footer>
             </div>
           }
@@ -132,7 +167,7 @@ function Event() {
 }
 function Card(props) {
   return (
-    <div className="col-md-4">
+    <div className="col-md-4 shoeBox">
       <img
         src={"https://codingapple1.github.io/shop/shoes" + props.i + ".jpg"}
         width="80%"
