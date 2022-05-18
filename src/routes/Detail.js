@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Nav, Button } from "react-bootstrap";
 import { addItem } from "./../store.js";
 import { useDispatch } from "react-redux";
+
 import "./../style/App.css";
 
 function Detail(props) {
@@ -47,7 +48,11 @@ function Detail(props) {
       <div className="row">
         <div className="col-md-6">
           <img
-            src={"https://codingapple1.github.io/shop/shoes1.jpg"}
+            src={
+              "https://codingapple1.github.io/shop/shoes" +
+              (찾은상품.id + 1) +
+              ".jpg"
+            }
             width="100%"
           />
         </div>
@@ -58,11 +63,18 @@ function Detail(props) {
           <button
             className="btn btn-danger"
             onClick={() => {
-              dispatch(addItem({ id: 1, name: "red knit", count: 1 }));
+              dispatch(
+                addItem({
+                  id: 찾은상품.id,
+                  name: 찾은상품.title,
+                  price: 찾은상품.price,
+                  count: 1,
+                })
+              );
               navigate("/cart");
             }}
           >
-            주문하기
+            장바구니
           </button>
         </div>
       </div>

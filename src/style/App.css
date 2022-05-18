@@ -43,6 +43,11 @@
   border: 1px solid #333;
 }
 
+.navbar {
+  position: sticky !important;
+  top: 0;
+}
+
 footer {
   margin-top: 20px;
   background-color: #333;

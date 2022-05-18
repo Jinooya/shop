@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" class="nav">
         <Container>
           <Navbar.Brand
             className="logo"
@@ -56,15 +56,15 @@ function App() {
               ABOUT
             </Nav.Link>
           </Nav>
-          {/* <Form className="d-flex">
+          <Form className="d-flex">
             <FormControl
               type="search"
-              placeholder="상품검색..."
+              placeholder="닉네임을 적어주세요"
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
-          </Form> */}
+            <Button variant="outline-success">input</Button>
+          </Form>
         </Container>
       </Navbar>
       <Routes>
@@ -139,21 +139,20 @@ function App() {
                   더보기 +
                 </button>
               )}
-
-              {/* footer  */}
-              <footer class="jumbotron text-center mt-5 mb-0">
-                <h3 class="text-secondary">ShoeShop</h3>
-                <p>
-                  ShoeShop’s Homepage is powered by
-                  <span class="text-primary"> codingapple</span> / Designed by
-                  <span class="text-primary"> jinwoo</span>
-                </p>
-              </footer>
             </div>
           }
         />
         <Route path="*" element={<div>준비중인 페이지</div>} />
       </Routes>
+      {/* footer  */}
+      <footer class="jumbotron text-center mt-5 mb-0">
+        <h3 class="text-secondary">ShoeShop</h3>
+        <p>
+          ShoeShop’s Homepage is powered by
+          <span class="text-primary"> codingapple</span> / Designed by
+          <span class="text-primary"> jinwoo</span>
+        </p>
+      </footer>
     </div>
   );
 }
@@ -175,7 +174,7 @@ function Card(props) {
       <h4
         className="shoesTitle"
         onClick={() => {
-          props.navigate("/detail/0");
+          props.navigate("/detail/" + (props.i - 1));
         }}
       >
         {props.shoes.title}

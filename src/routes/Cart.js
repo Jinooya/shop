@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCount } from "./../store.js";
 import { subCount } from "./../store.js";
 import "./../style/Cart.css";
+import { Button } from "react-bootstrap";
 
 function Cart() {
   let state = useSelector((state) => {
@@ -51,6 +52,7 @@ function Cart() {
           })}
         </tbody>
       </Table>
+      <Button variant="primary">결제하기</Button>{" "}
     </div>
   );
 }
