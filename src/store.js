@@ -20,19 +20,22 @@ let stock = createSlice({
 let cart = createSlice({
   name: "cart",
   initialState: [
-    { id: 0, name: "White and Black", count: 2 },
-    { id: 2, name: "Grey Yordan", count: 1 },
+    { id: 0, name: "White and Black", price: 100000, count: 2 },
+    { id: 2, name: "Grey Yordan", price: 200000, count: 1 },
   ],
   reducers: {
     addCount(state, action) {
       state[action.payload].count++;
+    },
+    subCount(state, action) {
+      state[action.payload].count--;
     },
     addItem(state, action) {
       state.push(action.payload);
     },
   },
 });
-export let { addCount, addItem } = cart.actions;
+export let { addCount, addItem, subCount } = cart.actions;
 
 export default configureStore({
   reducer: {

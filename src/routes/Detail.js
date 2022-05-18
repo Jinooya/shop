@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Nav, Button } from "react-bootstrap";
 import { addItem } from "./../store.js";
 import { useDispatch } from "react-redux";
+import "./../style/App.css";
 
 function Detail(props) {
   useEffect(() => {
@@ -15,6 +16,7 @@ function Detail(props) {
       clearTimeout(a);
     };
   });
+  let navigate = useNavigate();
 
   let { id } = useParams();
   let 찾은상품 = props.shoes.find(function (x) {
@@ -57,6 +59,7 @@ function Detail(props) {
             className="btn btn-danger"
             onClick={() => {
               dispatch(addItem({ id: 1, name: "red knit", count: 1 }));
+              navigate("/cart");
             }}
           >
             주문하기
