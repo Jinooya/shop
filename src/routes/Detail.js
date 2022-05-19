@@ -7,8 +7,26 @@ import { useDispatch } from "react-redux";
 import "./../style/App.css";
 
 function Detail(props) {
+  let { id } = useParams();
+  let 찾은상품 = props.shoes.find(function (x) {
+    return x.id === id;
+  });
+  let [alert, setAlert] = useState(true);
+  let [tab, setTab] = useState(0);
+  let [fade2, setFade2] = useState("");
+  let dispatch = useDispatch();
+
+  //useEffect안의 코드는 html렌더링 후에 동작합니다.
   useEffect(() => {
-    //useEffect안의 코드는 html렌더링 후에 동작합니다.
+    let 꺼낸거 = localStorage.getItem("watched");
+    꺼낸거 = JSON.parse(꺼낸거);
+    꺼낸거.push(찾은상품.id);
+    꺼낸거 = new Set(꺼낸거);
+    꺼낸거 = Array.from(꺼낸거);
+    localStorage.setItem("watched", JSON.stringify(꺼낸거));
+  }, []);
+
+  useEffect(() => {
     let a = setTimeout(() => {
       setAlert(false);
     }, 2000);
@@ -19,14 +37,6 @@ function Detail(props) {
   });
   let navigate = useNavigate();
 
-  let { id } = useParams();
-  let 찾은상품 = props.shoes.find(function (x) {
-    return x.id == id;
-  });
-  let [alert, setAlert] = useState(true);
-  let [tab, setTab] = useState(0);
-  let [fade2, setFade2] = useState("");
-  let dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       setFade2("end");
@@ -47,19 +57,20 @@ function Detail(props) {
 
       <div className="row">
         <div className="col-md-6">
-          <img
+          {/* <img
+            alt="상품이미지"
             src={
               "https://codingapple1.github.io/shop/shoes" +
               (찾은상품.id + 1) +
               ".jpg"
             }
             width="100%"
-          />
+          /> */}
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">{찾은상품.title}</h4>
-          <p> {찾은상품.content}</p>
-          <p> {찾은상품.price}</p>
+          {/* <h4 className="pt-5">{찾은상품.title}</h4> */}
+          {/* <p> {찾은상품.content}</p> */}
+          {/* <p> {찾은상품.price}</p> */}
           <button
             className="btn btn-danger"
             onClick={() => {
@@ -137,16 +148,6 @@ function TabContent({ tab }) {
       }
     </div>
   );
-
-  // if (탭 == 0) {
-  //   return <div>너무작음</div>;
-  // }
-  // if (props.tab == 1) {
-  //   return <div>리뷰없음</div>;
-  // }
-  // if (props.tab == 2) {
-  //   return <div>물어보지마세요</div>;
-  // }
 }
 
 export default Detail;

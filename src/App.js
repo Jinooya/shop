@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark" class="nav">
+      <Navbar bg="dark" variant="dark" className="nav">
         <Container>
           <Navbar.Brand
             className="logo"
@@ -88,7 +88,7 @@ function App() {
                 style={{ backgroundImage: "url(" + bg + ")" }}
               ></div>
               <div className="container">
-                <h4 class="sectionTitle">Brand New Shoes 👟</h4>
+                <h4 className="sectionTitle">Brand New Shoes 👟</h4>
                 <div className="row">
                   {shoes.map((a, i) => {
                     return (
@@ -145,12 +145,12 @@ function App() {
         <Route path="*" element={<div>준비중인 페이지</div>} />
       </Routes>
       {/* footer  */}
-      <footer class="jumbotron text-center mt-5 mb-0">
-        <h3 class="text-secondary">ShoeShop</h3>
+      <footer className="jumbotron text-center mt-5 mb-0">
+        <h3 className="text-secondary">ShoeShop</h3>
         <p>
           ShoeShop’s Homepage is powered by
-          <span class="text-primary"> codingapple</span> / Designed by
-          <span class="text-primary"> jinwoo</span>
+          <span className="text-primary"> codingapple</span> / Designed by
+          <span className="text-primary"> jinwoo</span>
         </p>
       </footer>
     </div>

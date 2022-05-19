@@ -58,3 +58,5 @@ function Cart() {
 }
 
 export default Cart;
+
+//해당 상품은 현재 판매 준비중이거나 오픈예정인 상품입니다.
