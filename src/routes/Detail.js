@@ -61,7 +61,7 @@ function Detail(props) {
           <img
             alt="상품이미지"
             src={
-              "https://codingapple1.github.io/shop/shoes" +
+              "https://jinwoo45.github.io/shop/shoes" +
               (찾은상품.id + 1) +
               ".jpg"
             }

@@ -93,7 +93,7 @@ function App() {
                     axios
                       .get(
                         // `https://codingapple1.github.io/shop/data${more}.json`
-                        `https://codingapple1.github.io/shop/data${more}.json`
+                        `https://jinwoo45.github.io/shop/data${more}.json`
                       )
                       .then((결과) => {
                         let copy = [...shoes, ...결과.data];
@@ -110,9 +110,7 @@ function App() {
                   className="moreBtn"
                   onClick={() => {
                     axios
-                      .get(
-                        `https://codingapple1.github.io/shop/data${more}.json`
-                      )
+                      .get(`https://jinwoo45.github.io/shop/data${more}.json`)
                       .then((결과) => {
                         let copy = [...shoes, ...결과.data];
                         setShoes(copy);
