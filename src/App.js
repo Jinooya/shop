@@ -92,6 +92,7 @@ function App() {
                   onClick={() => {
                     axios
                       .get(
+                        // `https://codingapple1.github.io/shop/data${more}.json`
                         `https://codingapple1.github.io/shop/data${more}.json`
                       )
                       .then((결과) => {
