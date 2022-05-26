@@ -151,7 +151,7 @@ function Card(props) {
   return (
     <div className="col-md-4 shoeBox">
       <img
-        src={"https://codingapple1.github.io/shop/shoes" + props.i + ".jpg"}
+        src={"https://jinwoo45.github.io/shop/shoes" + props.i + ".jpg"}
         width="80%"
       />
       <h4
