@@ -7,24 +7,25 @@ import { useDispatch } from "react-redux";
 import "./../style/App.css";
 
 function Detail(props) {
+  //useEffect안의 코드는 html렌더링 후에 동작합니다.
   let { id } = useParams();
   let 찾은상품 = props.shoes.find(function (x) {
-    return x.id === id;
+    return x.id == id;
   });
+  console.log(찾은상품);
+  // useEffect(() => {
+  //   let 꺼낸거 = localStorage.getItem("watched");
+  //   꺼낸거 = JSON.parse(꺼낸거);
+  //   꺼낸거.push(찾은상품.id);
+  //   꺼낸거 = new Set(꺼낸거);
+  //   꺼낸거 = Array.from(꺼낸거);
+  //   localStorage.setItem("watched", JSON.stringify(꺼낸거));
+  // }, []);
+
   let [alert, setAlert] = useState(true);
   let [tab, setTab] = useState(0);
   let [fade2, setFade2] = useState("");
   let dispatch = useDispatch();
-
-  //useEffect안의 코드는 html렌더링 후에 동작합니다.
-  useEffect(() => {
-    let 꺼낸거 = localStorage.getItem("watched");
-    꺼낸거 = JSON.parse(꺼낸거);
-    꺼낸거.push(찾은상품.id);
-    꺼낸거 = new Set(꺼낸거);
-    꺼낸거 = Array.from(꺼낸거);
-    localStorage.setItem("watched", JSON.stringify(꺼낸거));
-  }, []);
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -57,7 +58,7 @@ function Detail(props) {
 
       <div className="row">
         <div className="col-md-6">
-          {/* <img
+          <img
             alt="상품이미지"
             src={
               "https://codingapple1.github.io/shop/shoes" +
@@ -65,12 +66,12 @@ function Detail(props) {
               ".jpg"
             }
             width="100%"
-          /> */}
+          />
         </div>
         <div className="col-md-6">
-          {/* <h4 className="pt-5">{찾은상품.title}</h4> */}
-          {/* <p> {찾은상품.content}</p> */}
-          {/* <p> {찾은상품.price}</p> */}
+          <h4 className="pt-5">{찾은상품.title}</h4>
+          <p> {찾은상품.content}</p>
+          <p> {찾은상품.price}</p>
           <button
             className="btn btn-danger"
             onClick={() => {

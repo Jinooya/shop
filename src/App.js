@@ -1,13 +1,6 @@
 import "./style/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Navbar,
-  Container,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import bg from "./img/bg.png";
 import data from "./data.js";
 import React, { useState } from "react";
@@ -56,15 +49,6 @@ function App() {
               ABOUT
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="닉네임을 적어주세요"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">input</Button>
-          </Form>
         </Container>
       </Navbar>
       <Routes>
