@@ -1,7 +1,7 @@
 import "./style/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import bg from "./img/bg.png";
+import bg from "./img/bg.jpg";
 import data from "./data.js";
 import React, { useState } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
