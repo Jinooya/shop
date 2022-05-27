@@ -62,7 +62,7 @@ function App() {
         />
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
         <Route path="/cart" element={<Cart></Cart>} />
-        <Route path="/about" element={<div>어바웃페이지임</div>} />
+        <Route path="/about" element={<div>어바웃페이지</div>} />
         <Route
           path="/"
           element={

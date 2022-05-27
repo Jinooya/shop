@@ -13,14 +13,6 @@ function Detail(props) {
     return x.id == id;
   });
   console.log(찾은상품);
-  // useEffect(() => {
-  //   let 꺼낸거 = localStorage.getItem("watched");
-  //   꺼낸거 = JSON.parse(꺼낸거);
-  //   꺼낸거.push(찾은상품.id);
-  //   꺼낸거 = new Set(꺼낸거);
-  //   꺼낸거 = Array.from(꺼낸거);
-  //   localStorage.setItem("watched", JSON.stringify(꺼낸거));
-  // }, []);
 
   let [alert, setAlert] = useState(true);
   let [tab, setTab] = useState(0);
@@ -51,8 +43,8 @@ function Detail(props) {
     <div className={"container start " + fade2}>
       {alert === true ? (
         <div className="alert alert-warning">
-          2초이내 구매시 할인
-          <Button variant="primary">메롱</Button>
+          2초이내 구매시 할인 이벤트
+          <Button variant="primary">구매</Button>
         </div>
       ) : null}
 
@@ -123,12 +115,12 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent tab={tab}></TabContent>
+      <TabContent 찾은상품={찾은상품} tab={tab}></TabContent>
     </div>
   );
 }
 
-function TabContent({ tab }) {
+function TabContent({ tab, 찾은상품 }) {
   let [fade, setFade] = useState("");
 
   useEffect(() => {
@@ -143,9 +135,11 @@ function TabContent({ tab }) {
   return (
     <div className={"start " + fade}>
       {
-        [<div>너무작음</div>, <div>리뷰없음</div>, <div>물어보지마세요</div>][
-          tab
-        ]
+        [
+          <div>{찾은상품.info}</div>,
+          <div>{찾은상품.rev}</div>,
+          <div>{찾은상품.qna}</div>,
+        ][tab]
       }
     </div>
   );

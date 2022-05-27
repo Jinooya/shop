@@ -4,6 +4,9 @@ let data = [
     title: "White and Black",
     content: "Born in France",
     price: 120000,
+    info: "흠",
+    rev: "흠2",
+    qna: "흠3",
   },
 
   {
@@ -11,6 +14,9 @@ let data = [
     title: "Red Knit",
     content: "Born in Seoul",
     price: 110000,
+    info: "흠",
+    rev: "흠2",
+    qna: "흠3",
   },
 
   {
@@ -18,6 +24,9 @@ let data = [
     title: "Grey Yordan",
     content: "Born in the States",
     price: 130000,
+    info: "흠",
+    rev: "흠2",
+    qna: "흠3",
   },
 ];
 export default data;

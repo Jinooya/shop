@@ -3,18 +3,27 @@
     "id": 6,
     "title": "Sijang",
     "content": "from Dongmyo station",
-    "price": 120000
+    "price": 120000,
+    "info": "흠",
+    "rev": "흠2",
+    "qna": "흠3"
   },
   {
     "id": 7,
     "title": "Tag gari",
     "content": "ali and taobao",
-    "price": 120000
+    "price": 120000,
+    "info": "흠",
+    "rev": "흠2",
+    "qna": "흠3"
   },
   {
     "id": 8,
     "title": "Flyer",
     "content": "Refund not available",
-    "price": 120000
+    "price": 120000,
+    "info": "흠",
+    "rev": "흠2",
+    "qna": "흠3"
   }
 ]
