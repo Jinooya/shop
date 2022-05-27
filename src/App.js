@@ -8,6 +8,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import axios from "axios";
 import Cart from "./routes/Cart.js";
+import logo from "./img/logo.png";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark" className="nav">
+      <Navbar bg="light" variant="light" className="nav">
         <Container>
           <Navbar.Brand
             className="logo"
@@ -24,7 +25,7 @@ function App() {
               navigate("/");
             }}
           >
-            NewBalance
+            <img src={logo} />
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
@@ -32,21 +33,21 @@ function App() {
                 navigate("/");
               }}
             >
-              HOME
+              Home
             </Nav.Link>
             <Nav.Link
               onClick={() => {
                 navigate("/cart");
               }}
             >
-              CART
+              Cart
             </Nav.Link>
             <Nav.Link
               onClick={() => {
                 navigate("/about");
               }}
             >
-              ABOUT
+              About
             </Nav.Link>
           </Nav>
         </Container>
