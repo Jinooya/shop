@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addCount } from "./../store.js";
 import { subCount } from "./../store.js";
+import { subItem } from "./../store.js";
 import "./../style/Cart.css";
 import { Button } from "react-bootstrap";
 
@@ -12,11 +13,10 @@ function Cart() {
   let dispatch = useDispatch();
   return (
     <div>
-      {state.user.name} 님의 장바구니
+      <h3>장바구니</h3>
       <Table>
         <thead>
           <tr>
-            <th>#(상품번호)</th>
             <th>상품명</th>
             <th>수량</th>
             <th>가격</th>
@@ -27,7 +27,6 @@ function Cart() {
           {state.cart.map((a, i) => {
             return (
               <tr key={i}>
-                <td>{state.cart[i].id}</td>
                 <td>{state.cart[i].name}</td>
                 <td>{state.cart[i].count}</td>
                 <td>{state.cart[i].price}</td>
@@ -45,6 +44,22 @@ function Cart() {
                     }}
                   >
                     -
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      dispatch(
+                        subItem({
+                          id: state.cart[i].name,
+                          name: state.cart[i].count,
+                          price: state.cart[i].price,
+                          count: 1,
+                        })
+                      );
+                    }}
+                  >
+                    x
                   </button>
                 </td>
               </tr>
