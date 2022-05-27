@@ -41,12 +41,12 @@ function Detail(props) {
 
   return (
     <div className={"container start " + fade2}>
-      {alert === true ? (
+      {/* {alert === true ? (
         <div className="alert alert-warning">
           2초이내 구매시 할인 이벤트
           <Button variant="primary">구매</Button>
         </div>
-      ) : null}
+      ) : null} */}
 
       <div className="row">
         <div className="col-md-6">
@@ -57,7 +57,7 @@ function Detail(props) {
               (찾은상품.id + 1) +
               ".jpg"
             }
-            width="100%"
+            width="60%"
           />
         </div>
         <div className="col-md-6">
