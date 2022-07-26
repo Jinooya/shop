@@ -48,6 +48,14 @@
   top: 0;
 }
 
+.foundProduct {
+  position: fixed;
+  width: 100px;
+  right: 20px;
+  top: 40%;
+  background-color: white;
+}
+
 footer {
   margin-top: 20px;
   background-color: #333;

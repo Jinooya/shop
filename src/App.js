@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import bg from "./img/bg.jpg";
 import data from "./data.js";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
 import axios from "axios";
@@ -14,6 +14,18 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
   let [more, setMore] = useState(2);
+
+  useEffect(() => {
+    var myArr = localStorage.getItem("watched");
+    if (myArr == null) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    } else {
+      myArr = JSON.parse(myArr);
+    }
+  }, []);
+
+  var myArr = localStorage.getItem("watched");
+  myArr = JSON.parse(myArr);
 
   return (
     <div className="App">
@@ -40,7 +52,7 @@ function App() {
                 navigate("/cart");
               }}
             >
-              Cart
+              장바구니
             </Nav.Link>
             <Nav.Link
               onClick={() => {
@@ -52,6 +64,21 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      <div className="foundProduct">
+        <div>CART({myArr ? myArr.length : 0})</div>
+        <div>최근본상품</div>
+        {myArr &&
+          myArr.map((a) => (
+            <div>
+              <img
+                src={"https://jinwoo45.github.io/shop/shoes" + (a + 1) + ".jpg"}
+                width="80%"
+              />
+            </div>
+          ))}
+
+        <div>TOP🔼</div>
+      </div>
       <Routes>
         <Route
           path="/detail"
@@ -63,7 +90,7 @@ function App() {
         />
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
         <Route path="/cart" element={<Cart></Cart>} />
-        <Route path="/about" element={<div>어바웃페이지</div>} />
+        <Route path="/about" element={<div>어바웃페이지입니다.</div>} />
         <Route
           path="/"
           element={
@@ -72,6 +99,7 @@ function App() {
                 className="main-bg"
                 style={{ backgroundImage: "url(" + bg + ")" }}
               ></div>
+
               <div className="container">
                 <h4 className="sectionTitle">Brand New Shoes 👟</h4>
                 <div className="row">
@@ -104,7 +132,7 @@ function App() {
                     console.log(more);
                   }}
                 >
-                  그만 누르셈
+                  끝
                 </button>
               ) : (
                 <button

@@ -9,15 +9,26 @@ import "./../style/App.css";
 function Detail(props) {
   //useEffect안의 코드는 html렌더링 후에 동작합니다.
   let { id } = useParams();
-  let 찾은상품 = props.shoes.find(function (x) {
+  let found = props.shoes.find(function (x) {
     return x.id == id;
   });
-  console.log(찾은상품);
+  console.log(found);
 
   let [alert, setAlert] = useState(true);
   let [tab, setTab] = useState(0);
   let [fade2, setFade2] = useState("");
   let dispatch = useDispatch();
+
+  useEffect(() => {
+    let took = localStorage.getItem("watched");
+    took = JSON.parse(took);
+    took.push(found.id);
+
+    took = new Set(took);
+    took = Array.from(took);
+
+    localStorage.setItem("watched", JSON.stringify(took));
+  }, []);
 
   useEffect(() => {
     let a = setTimeout(() => {
@@ -41,37 +52,35 @@ function Detail(props) {
 
   return (
     <div className={"container start " + fade2}>
-      {/* {alert === true ? (
+      {alert === true ? (
         <div className="alert alert-warning">
-          2초이내 구매시 할인 이벤트
+          할인 이벤트를 적용해보세요
           <Button variant="primary">구매</Button>
         </div>
-      ) : null} */}
+      ) : null}
 
       <div className="row">
         <div className="col-md-6">
           <img
             alt="상품이미지"
             src={
-              "https://jinwoo45.github.io/shop/shoes" +
-              (찾은상품.id + 1) +
-              ".jpg"
+              "https://jinwoo45.github.io/shop/shoes" + (found.id + 1) + ".jpg"
             }
             width="60%"
           />
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">{찾은상품.title}</h4>
-          <p> {찾은상품.content}</p>
-          <p> {찾은상품.price}</p>
+          <h4 className="pt-5">{found.title}</h4>
+          <p> {found.content}</p>
+          <p> {found.price}</p>
           <button
             className="btn btn-danger"
             onClick={() => {
               dispatch(
                 addItem({
-                  id: 찾은상품.id,
-                  name: 찾은상품.title,
-                  price: 찾은상품.price,
+                  id: found.id,
+                  name: found.title,
+                  price: found.price,
                   count: 1,
                 })
               );
@@ -115,12 +124,12 @@ function Detail(props) {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <TabContent 찾은상품={찾은상품} tab={tab}></TabContent>
+      <TabContent found={found} tab={tab}></TabContent>
     </div>
   );
 }
 
-function TabContent({ tab, 찾은상품 }) {
+function TabContent({ tab, found }) {
   let [fade, setFade] = useState("");
 
   useEffect(() => {
@@ -136,9 +145,9 @@ function TabContent({ tab, 찾은상품 }) {
     <div className={"start " + fade}>
       {
         [
-          <div>{찾은상품.info}</div>,
-          <div>{찾은상품.rev}</div>,
-          <div>{찾은상품.qna}</div>,
+          <div>{found.info}</div>,
+          <div>{found.rev}</div>,
+          <div>{found.qna}</div>,
         ][tab]
       }
     </div>
