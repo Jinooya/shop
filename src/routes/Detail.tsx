@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Nav, Button } from "react-bootstrap";
-import { addItem } from "./../store.js";
+import { addItem } from "../store.js";
 import { useDispatch } from "react-redux";
 
 import "./../style/App.css";
 
-function Detail(props) {
+function Detail(props: any) {
   //useEffect안의 코드는 html렌더링 후에 동작합니다.
   let { id } = useParams();
-  let found = props.shoes.find(function (x) {
+  let found = props.shoes.find(function (x: any) {
     return x.id == id;
   });
   console.log(found);
@@ -20,14 +20,16 @@ function Detail(props) {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    let took = localStorage.getItem("watched");
-    took = JSON.parse(took);
-    took.push(found.id);
+    let took: any = localStorage.getItem("watched");
+    if (took !== null) {
+      took = JSON.parse(took);
+      took.push(found.id);
 
-    took = new Set(took);
-    took = Array.from(took);
+      took = new Set(took);
+      took = Array.from(took);
 
-    localStorage.setItem("watched", JSON.stringify(took));
+      localStorage.setItem("watched", JSON.stringify(took));
+    }
   }, []);
 
   useEffect(() => {
@@ -129,7 +131,16 @@ function Detail(props) {
   );
 }
 
-function TabContent({ tab, found }) {
+interface TabProps {
+  tab: number;
+  found: {
+    info: string;
+    rev: string;
+    qna: string;
+  };
+}
+
+function TabContent({ tab, found }: TabProps) {
   let [fade, setFade] = useState("");
 
   useEffect(() => {

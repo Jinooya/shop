@@ -1,13 +1,13 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addCount } from "./../store.js";
-import { subCount } from "./../store.js";
-import { subItem } from "./../store.js";
+import { addCount } from "../store.js";
+import { subCount } from "../store.js";
+import { subItem } from "../store.js";
 import "./../style/Cart.css";
 import { Button } from "react-bootstrap";
 
 function Cart() {
-  let state = useSelector((state) => {
+  let state: any = useSelector((state) => {
     return state;
   });
   let dispatch = useDispatch();
@@ -24,7 +24,7 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          {state.cart.map((a, i) => {
+          {state.cart.map((a: string, i: number) => {
             return (
               <tr key={i}>
                 <td>{state.cart[i].name}</td>

@@ -19,10 +19,7 @@ let stock = createSlice({
 
 let cart = createSlice({
   name: "cart",
-  initialState: [
-    // { id: 0, name: "White and Black", price: 100000, count: 2 },
-    // { id: 2, name: "Grey Yordan", price: 200000, count: 1 },
-  ],
+  initialState: [],
   reducers: {
     addCount(state, action) {
       state[action.payload].count++;

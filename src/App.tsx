@@ -2,7 +2,7 @@ import "./style/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import bg from "./img/bg.jpg";
-import data from "./data.js";
+import data from "./data";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.js";
@@ -24,7 +24,7 @@ function App() {
     }
   }, []);
 
-  var myArr = localStorage.getItem("watched");
+  let myArr: any = localStorage.getItem("watched");
   myArr = JSON.parse(myArr);
 
   return (
@@ -68,10 +68,14 @@ function App() {
         <div>CART({myArr ? myArr.length : 0})</div>
         <div>최근본상품</div>
         {myArr &&
-          myArr.map((a) => (
+          myArr.map((a: any) => (
             <div>
               <img
-                src={"https://jinwoo45.github.io/shop/shoes" + (a + 1) + ".jpg"}
+                src={
+                  "https://jinwoo45.github.io/shop/data/shoes" +
+                  (a + 1) +
+                  ".jpg"
+                }
                 width="80%"
               />
             </div>
@@ -122,7 +126,7 @@ function App() {
                     axios
                       .get(
                         // `https://codingapple1.github.io/shop/data${more}.json`
-                        `https://jinwoo45.github.io/shop/data${more}.json`
+                        `https://jinwoo45.github.io/shop/data/data${more}.json`
                       )
                       .then((결과) => {
                         let copy = [...shoes, ...결과.data];
@@ -139,7 +143,9 @@ function App() {
                   className="moreBtn"
                   onClick={() => {
                     axios
-                      .get(`https://jinwoo45.github.io/shop/data${more}.json`)
+                      .get(
+                        `https://jinwoo45.github.io/shop/data/data${more}.json`
+                      )
                       .then((결과) => {
                         let copy = [...shoes, ...결과.data];
                         setShoes(copy);
@@ -176,11 +182,11 @@ function Event() {
     </div>
   );
 }
-function Card(props) {
+function Card(props: any) {
   return (
     <div className="col-md-4 shoeBox">
       <img
-        src={"https://jinwoo45.github.io/shop/shoes" + props.i + ".jpg"}
+        src={"https://jinwoo45.github.io/shop/data/shoes" + props.i + ".jpg"}
         width="80%"
       />
       <h4
